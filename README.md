@@ -12,6 +12,11 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 2. Start the app
 
+   Different network:
+   ```bash
+   npx expo start --tunnel
+   ```
+   Same network:
    ```bash
    npx expo start
    ```
