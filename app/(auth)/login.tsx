@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Keyboard, Pressable, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/FirebaseConfig';
+import { router } from 'expo-router';
 
 export default function LoginScreen() {
   const { setUser } = useAuth();
@@ -74,7 +75,7 @@ export default function LoginScreen() {
           </Pressable>
         </View>
 
-        <TouchableOpacity className="bg-pink-600 rounded-full py-5 mt-10 mb-5" onPress={handleLogin}>
+        <TouchableOpacity className="bg-primary rounded-full py-5 mt-10 mb-5" onPress={handleLogin}>
           <Text className="text-center text-white font-semibold text-xl">
             Đăng nhập
           </Text>
@@ -82,7 +83,8 @@ export default function LoginScreen() {
 
         <Text className="text-center text-gray-500 text-sm mb-5">
           Bạn chưa có tài khoản?{' '}
-          <Text className="text-pink-600 font-semibold">Đăng ký</Text>
+          <Text className="text-primary font-semibold"
+            onPress={() => router.push('/(auth)/signup')}>Đăng ký</Text>
         </Text>
 
         <View className="flex-row items-center mb-5 mt-16">

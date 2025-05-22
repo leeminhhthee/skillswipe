@@ -1,11 +1,9 @@
 import { View, Text, TouchableOpacity, ScrollView, Image, SafeAreaView } from 'react-native'
 import React, { useMemo, useState } from 'react'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import { useRoute } from '@react-navigation/native';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, router  } from 'expo-router';
 
 const ProfileScreen = () => {
-  const route = useRoute();
   const { card: cardStr } = useLocalSearchParams();
   const card = useMemo(() => {
     try {
@@ -43,9 +41,9 @@ const ProfileScreen = () => {
         <View className="mt-14 px-4 pb-4 border-b border-gray-200">
           <View className="flex-row items-center">
             <Text className="text-2xl font-bold text-gray-800">Gia Bảo</Text>
-            <Ionicons name='diamond' size={18} color="#60a5fa" fill="#60a5fa" style={{ marginLeft: 8 }} />
+            <Ionicons name='diamond' size={18} color="#422f96" style={{ marginLeft: 8 }} />
           </View>
-          <Text className="text-gray-600 text-bold mt-1">{card?.occupation}</Text>
+          <Text className="text-gray-600 text-bold mt-1">{card?.sportName} {card.role.charAt(0).toUpperCase() + card.role.slice(1)}</Text>
           <View className="mt-2">
             <View className="flex-row items-center">
               <Text className="text-gray-500 text-sm">Foreign Trade University HCMC</Text>
@@ -141,6 +139,26 @@ const ProfileScreen = () => {
                   />
                 </TouchableOpacity>
               ))}
+            </View>
+          </View>
+
+          <View className="p-4 border-b border-gray-200">
+            <Text className="font-bold text-lg text-gray-800 mb-2">Nội dung đào tạo</Text>
+            <View>
+              <Text className="text-gray-700 leading-5 font-bold">
+                Kỹ năng cơ bản
+              </Text>
+              <Text className="text-gray-700 leading-5 font-light italic">
+                Kỹ năng cầm vợt; Tư thế chuẩn bị & di chuyển; Kỹ thuật đánh cầu cơ bản;...
+              </Text>
+            </View>
+            <View>
+              <Text className="text-gray-700 leading-5 font-bold">
+                Kỹ năng nâng cao
+              </Text>
+              <Text className="text-gray-700 leading-5 font-light italic">
+                Chiến thuật cơ bản trong thi đấu; Tâm lý thi đấu & dinh dưỡng thể thao;...
+              </Text>
             </View>
           </View>
 

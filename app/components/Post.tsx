@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, ImageSourcePropType } from 'react-native';
-import {  Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { Video } from 'expo-av';
 
 type PostProps = {
   authorName: string;
@@ -8,7 +9,8 @@ type PostProps = {
   authorAvatar: ImageSourcePropType;
   timeAgo: string;
   caption: string;
-  postImage?: ImageSourcePropType;
+  postMedia?: string | ImageSourcePropType;
+  mediaType?: 'image' | 'video';
   initialLikes?: number;
   initialIsLiked?: boolean;
   onLikePress?: (liked: boolean) => void;
@@ -20,7 +22,8 @@ export default function Post({
   authorAvatar,
   timeAgo,
   caption,
-  postImage,
+  postMedia,
+  mediaType,
   initialLikes = 0,
   initialIsLiked = false,
   onLikePress,
@@ -36,62 +39,54 @@ export default function Post({
   };
 
   return (
-    <View className="flex-1 overflow-auto">
-        <View className="border-b border-gray-200">
-            {/* Post Header */}
-            <View className="flex-row items-center gap-2 p-3">
-                <View className="w-10 h-10 rounded-full overflow-hidden">
-                    <Image
-                    source={authorAvatar}
-                    style={{ width: 40, height: 40 }}
-                    className="object-cover"
-                    />
-                </View>
-                <View className="flex-1">
-                    <View className="flex-row items-center gap-1">
-                        <Text className="text-sm font-medium">{authorName}</Text>
-                    </View>
-                    <Text className="text-xs text-gray-500">{authorRole}</Text>
-                </View>
-                <Text className="text-xs text-gray-500">{timeAgo}</Text>
-            </View>
-
-            {/* Post Image */}
-            <View className="w-full aspect-[3/4] bg-gray-100 relative">
-                <Image
-                    source={postImage}
-                    style={{ width: '100%', height: undefined, aspectRatio: 3 / 4 }}
-                    className="object-cover"
-                />
-            </View>
-
-            {/* Post Actions */}
-            <View className="p-3">
-                <View className="flex-row items-center gap-4 mb-2">
-                    <TouchableOpacity
-                    className="flex-row items-center gap-1"
-                    onPress={toggleLike}
-                    accessibilityLabel={isLiked ? "Bỏ yêu thích" : "Yêu thích"}
-                    >
-                        <Ionicons
-                            name="heart"
-                            size={24}
-                            color={isLiked ? "#EF4444" : "gray"}
-                        />
-                        <Text className="text-sm">{likeCount}</Text>
-                    </TouchableOpacity>
-                    <View className="flex-row items-center gap-1">
-                        <Ionicons name="chatbubble" size={24} color="gray" />
-                        <Text className="text-sm">35</Text>
-                    </View>
-                    <Ionicons name="share" size={24} color="gray" />
-                </View>
-                <View className="flex-row items-center gap-2">
-                    <Text className="text-sm font-bold text-amber-600">{caption}</Text>
-                </View>
-            </View>
+    <View className="flex-1 overflow-auto border-b border-gray-200">
+      {/* Header */}
+      <View className="flex-row items-center gap-2 p-3">
+        <View className="w-10 h-10 rounded-full overflow-hidden">
+          <Image source={authorAvatar} style={{ width: 40, height: 40 }} />
         </View>
-    </View>
+        <View className="flex-1">
+          <Text className="text-sm font-medium">{authorName}</Text>
+          <Text className="text-xs text-gray-500">{authorRole}</Text>
+        </View>
+        <Text className="text-xs text-gray-500">{timeAgo}</Text>
+      </View>
 
+      {/* Media */}
+      {postMedia && mediaType === 'image' && (
+        <Image
+          source={typeof postMedia === 'string' ? { uri: postMedia } : postMedia}
+          style={{ width: '100%', height: undefined, aspectRatio: 3 / 4 }}
+          resizeMode="cover"
+        />
+      )}
+
+      {postMedia && mediaType === 'video' && typeof postMedia === 'string' && (
+        <Video
+          source={{ uri: postMedia }}
+          useNativeControls
+          resizeMode="cover"
+          shouldPlay={false}
+          isLooping={false}
+          style={{ width: '100%', height: 280 }}
+        />
+      )}
+
+      {/* Actions */}
+      <View className="p-3">
+        <View className="flex-row items-center gap-4 mb-2">
+          <TouchableOpacity onPress={toggleLike} className="flex-row items-center gap-1">
+            <Ionicons name="heart" size={24} color={isLiked ? '#EF4444' : 'gray'} />
+            <Text className="text-sm">{likeCount}</Text>
+          </TouchableOpacity>
+          <View className="flex-row items-center gap-1">
+            <Ionicons name="chatbubble" size={24} color="gray" />
+            <Text className="text-sm">35</Text>
+          </View>
+          <Ionicons name="share" size={24} color="gray" />
+        </View>
+        <Text className="text-sm font-bold text-amber-600">{caption}</Text>
+      </View>
+    </View>
   );
 }

@@ -35,7 +35,7 @@ const BookClassScreen = () => {
     <View className="px-6 pt-6 flex-1 bg-white">
       {/* Avatar + Info */}
       <View className="items-center">
-        <Image source={require('../../assets/images/avt.png')} className="w-24 h-24 rounded-full border-2 border-pink-400" />
+        <Image source={require('../../assets/images/avt.png')} className="w-24 h-24 rounded-full border-2 border-primary" />
         <Text className="mt-4 text-lg font-semibold text-gray-900">{name}</Text>
         <Text className="text-sm text-gray-500">Badminton Trainer</Text>
       </View>
@@ -92,7 +92,7 @@ const BookClassScreen = () => {
       {/* Submit button (zIndex thấp hơn dropdowns) */}
       <View className="mt-6 z-10">
         <Pressable
-          className="bg-purple-700 py-3 rounded-full items-center"
+          className="bg-primary py-3 rounded-full items-center"
           onPress={() => {
             router.back()
           }}

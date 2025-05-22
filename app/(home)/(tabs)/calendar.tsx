@@ -58,7 +58,7 @@ const CalendarScreen = () => {
         <View className="flex-row">
           {daysOfWeek.map((day) => (
             <View key={day} className="flex-1 items-center">
-              <View className="bg-pink-600 rounded-md py-1 px-1 w-11">
+              <View className="bg-primary rounded-md py-1 px-1 w-11">
                 <Text className="text-white text-xs font-medium text-center">{day}</Text>
               </View>
             </View>
