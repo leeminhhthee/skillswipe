@@ -1,16 +1,18 @@
 import useAuth from '@/hooks/useAuth';
-import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { AntDesign, FontAwesome, Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useState } from 'react';
 import { Alert, Keyboard, Pressable, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/FirebaseConfig';
 import { router } from 'expo-router';
+import { Image } from 'expo-image';
 
 export default function LoginScreen() {
   const { setUser } = useAuth();
     
   const [phoneOrMail, setPhoneOrMail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -50,11 +52,11 @@ export default function LoginScreen() {
       <View className="flex-1 bg-white px-6 pt-20">
         <Text className="text-center text-4xl font-semibold mb-10 mt-11">Đăng nhập</Text>
 
-        <Text className="mb-1 text-gray-700">Phone/Mail</Text>
+        <Text className="mb-1 text-gray-700">Email</Text>
         <TextInput
           value={phoneOrMail}
           onChangeText={setPhoneOrMail}
-          placeholder="(+84) 32 650 3456"
+          placeholder="npgb@gmail.com"
           placeholderTextColor="gray"
           className="border border-gray-300 rounded-full px-4 h-12 mb-5 pb-1 text-base text-gray-900"
           keyboardType="email-address"
@@ -67,11 +69,15 @@ export default function LoginScreen() {
             onChangeText={setPassword}
             placeholder="••••••••"
             placeholderTextColor="gray"
-            secureTextEntry
+            secureTextEntry={!showPassword}
             className="flex-1 text-base text-gray-900"
           />
-          <Pressable>
-            <Text className="text-sm text-gray-500">Quên mật khẩu</Text>
+          <Pressable onPress={() => setShowPassword(prev => !prev)}>
+            <Ionicons
+              name={showPassword ? 'eye-off' : 'eye'}
+              size={20}
+              color="gray"
+            />
           </Pressable>
         </View>
 
@@ -87,6 +93,10 @@ export default function LoginScreen() {
             onPress={() => router.push('/(auth)/signup')}>Đăng ký</Text>
         </Text>
 
+        <Text className="text-center text-sm text-primary font-medium mb-5" onPress={() => {/* TODO: Handle forgot password */}}>
+          Quên mật khẩu?
+        </Text>
+
         <View className="flex-row items-center mb-5 mt-16">
           <View className="flex-1 border-b border-gray-300" />
           <Text className="mx-3 text-gray-400">Hoặc đăng nhập</Text>
@@ -94,14 +104,20 @@ export default function LoginScreen() {
         </View>
 
         <View className="flex-row justify-center gap-x-8 mt-4">
-          <TouchableOpacity className="border border-gray-400 rounded-full w-14 h-14 items-center justify-center">
-            <FontAwesome name="facebook" size={28} color="#1877F2" />
+          <TouchableOpacity>
+            <Image
+              source={require('../../assets/images/fb.png')}
+              style={{ width: 48, height: 48 }}
+            />
           </TouchableOpacity>
 
-          <TouchableOpacity className="border border-gray-400 rounded-full w-14 h-14 items-center justify-center"
+          <TouchableOpacity
             onPress={handleGoogleLogin}
           >
-            <AntDesign name="google" size={28} color="#DB4437" />
+            <Image
+              source={require('../../assets/images/gg.png')}
+              style={{ width: 48, height: 48 }}
+            />
           </TouchableOpacity>
         </View>
 

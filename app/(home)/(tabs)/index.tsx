@@ -7,160 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 import Swiper from "react-native-deck-swiper"
 import LottieView from "lottie-react-native";
-
-const DUMMY_DATA = [
-  {
-    id: 111,
-    username: "Lê Hoàng Minh",
-    sportName: "Cầu lông",
-    sportValues: 'badminton',
-    photoUrl: "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d",
-    age: "21",
-    role: "trainer",
-    subject: "Cầu lông",
-    method: "Offline",
-    fee: "2.000.000 VND - 3.999.9999 VND",
-    skillLevel: "Nâng cao",
-    teachingFrequency: "3 buổi/tuần",
-    likedMe: true,
-    iLiked: true // ✅ Match!
-  },
-  {
-    id: 112,
-    username: "Phạm Thanh Tùng",
-    sportName: "Bóng chuyền",
-    photoUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c",
-    age: "21",
-    role: "trainer",
-    subject: "Bóng chuyền",
-    method: "Offline",
-    fee: "Dưới 2.000.000 VND",
-    skillLevel: "Cơ bản",
-    teachingFrequency: "3 buổi/tuần",
-    likedMe: false,
-    iLiked: true
-  },
-  {
-    id: 113,
-    username: "Nguyễn Thái Dương",
-    sportName: "Guitar",
-    photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9",
-    age: "21",
-    role: "trainer",
-    subject: "Guitar",
-    method: "Offline",
-    fee: "6.000.000 VND - 8.000.000 VND",
-    skillLevel: "Nâng cao",
-    teachingFrequency: "3-5 buổi/tuần",
-    likedMe: true,
-    iLiked: false
-  },
-  {
-    id: 114,
-    username: "Bùi Minh Tuấn",
-    sportName: "Bơi lội",
-    photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d",
-    age: "21",
-    role: "trainer",
-    subject: "Bơi lội",
-    method: "Offline",
-    fee: "Dưới 2.000.000 VND",
-    skillLevel: "Cơ bản",
-    teachingFrequency: "Dưới 2 buổi/tuần",
-    likedMe: false,
-    iLiked: false
-  },
-  {
-    id: 115,
-    username: "Nguyễn Văn Hậu",
-    sportName: "Piano",
-    photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
-    age: "21",
-    role: "trainer",
-    subject: "Piano",
-    method: "Offline",
-    fee: "4.000.000 VND - 6.000.000 VND",
-    skillLevel: "Nâng cao",
-    teachingFrequency: "3-5 buổi/tuần",
-    likedMe: true,
-    iLiked: true // ✅ Match!
-  },
-  {
-    id: 116,
-    username: "Trần Quốc Hưng",
-    sportName: "Bóng rổ",
-    photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1",
-    age: "21",
-    role: "trainer",
-    subject: "Bóng rổ",
-    method: "Offline",
-    fee: "4.000.000 VND - 6.000.000 VND",
-    skillLevel: "Cơ bản",
-    teachingFrequency: "3-5 buổi/tuần",
-    likedMe: false,
-    iLiked: false
-  },
-  {
-    id: 117,
-    username: "Vương Thanh Bình",
-    sportName: "Tennis",
-    photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
-    age: "21",
-    role: "trainer",
-    subject: "Tennis",
-    method: "Offline",
-    fee: "4.000.000 VND - 6.000.000 VND",
-    skillLevel: "Nâng cao",
-    teachingFrequency: "3-5 buổi/tuần",
-    likedMe: true,
-    iLiked: false
-  },
-  {
-    id: 118,
-    username: "Lý Gia Bảo",
-    sportName: "Cầu lông",
-    photoUrl: "https://images.unsplash.com/photo-1607746882042-944635dfe10e",
-    age: "21",
-    role: "trainer",
-    subject: "Cầu lông",
-    method: "Offline",
-    fee: "6.000.000 VND - 8.000.000 VND",
-    skillLevel: "Nâng cao",
-    teachingFrequency: "3 buổi/tuần",
-    likedMe: false,
-    iLiked: true
-  },
-  {
-    id: 119,
-    username: "Tạ Quốc Khánh",
-    sportName: "Guitar",
-    photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
-    age: "21",
-    role: "trainer",
-    subject: "Guitar",
-    method: "Offline",
-    fee: "2.000.000 VND - 3.999.9999 VND",
-    skillLevel: "Cơ bản",
-    teachingFrequency: "3 buổi/tuần",
-    likedMe: true,
-    iLiked: true // ✅ Match!
-  },
-  {
-    id: 120,
-    username: "Đỗ Nhật Trường",
-    sportName: "Bóng rổ",
-    photoUrl: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39",
-    age: "21",
-    role: "trainer",
-    subject: "Bóng rổ",
-    method: "Offline",
-    fee: "2.000.000 VND - 3.999.9999 VND",
-    skillLevel: "Cơ bản",
-    teachingFrequency: "3 buổi/tuần",
-    likedMe: false,
-    iLiked: false
-  },
-];
+import dummyData from "@/assets/data/dummy_data.json";
 
 
 export default function HomeScreen() {
@@ -170,9 +17,10 @@ export default function HomeScreen() {
 
   const passed = usePassed((state) => state.passed);
   const selectedSubject = usePassed((state) => state.subject);
-  const filteredData = selectedSubject ? DUMMY_DATA.filter((item) => item.sportName === selectedSubject) : DUMMY_DATA
+  const filteredData = selectedSubject
+    ? dummyData.filter((item) => item.sportName === selectedSubject)
+    : dummyData;
 
-  console.log(filteredData)
 
   useEffect(() => {
     setCardIndex(0);
@@ -185,6 +33,9 @@ export default function HomeScreen() {
   const [cardIndex, setCardIndex] = useState(0);
   const [isAllSwiped, setIsAllSwiped] = useState(false);
   const setPassed = usePassed((state) => state.setPassed);
+
+  const [userLikes, setUserLikes] = useState<{ [id: number]: boolean }>({});
+
 
   useEffect(() => {
     if (passed) {
@@ -269,8 +120,8 @@ export default function HomeScreen() {
             <Swiper
               ref={swipeRef}
               cardIndex={0}
-              stackSize={DUMMY_DATA.length}
-              stackSeparation={1}
+              stackSize={3}
+              stackSeparation={0}
               backgroundColor="transparent"
               verticalSwipe={false}
               onSwiped={(index) => {
@@ -280,15 +131,18 @@ export default function HomeScreen() {
                 }
               }}
               onSwipedAll={() => setIsAllSwiped(true)}
-              onSwipedLeft={() => {
-                console.log("Swipe NOPE")
+              onSwipedLeft={(index) => {
+                const currentCard = filteredData[index];
+                setUserLikes((prev) => ({ ...prev, [currentCard.id]: false }));
+                console.log("👎 Nope", currentCard.username);
               }}
               onSwipedRight={(index) => {
                 const currentCard = filteredData[index];
+                setUserLikes((prev) => ({ ...prev, [currentCard.id]: true }));
                 if (currentCard?.likedMe) {
                   console.log("💖 MATCHED WITH", currentCard.username);
 
-                  // 👉 Gọi MatchScreen modal
+                  // Gọi MatchScreen modal
                   router.push({
                     pathname: "/(modals)/match",
                     params: {
@@ -298,7 +152,7 @@ export default function HomeScreen() {
                   });
 
                 } else {
-                  console.log("Liked", currentCard.username);
+                  console.log("❤️ Liked", currentCard.username);
                 }
               }}
               overlayLabels={{
@@ -329,7 +183,7 @@ export default function HomeScreen() {
                     {/* Left side: Text info */}
                     <View>
                       <View className="flex-row items-center space-x-2">
-                        <Text className="text-white text-3xl font-bold">
+                        <Text className="text-white text-2xl font-bold">
                           {card.username}
                         </Text>
                         <Text className="text-white text-2xl font-semibold ms-4">{card.age} 💎</Text>

@@ -33,23 +33,34 @@ const ProfileScreen = () => {
 
           {/* Profile Picture */}
           <View className="absolute -bottom-12 left-4 border-2 border-white rounded-full bg-white shadow-md">
-            <Image source={require('../../assets/images/avt2.jpg')} className="w-24 h-24 rounded-full" />
+            <Image
+              source={
+                card.photoUrl
+                  ? { uri: card.photoUrl }
+                  : require("../../assets/images/avt_placeholder.png")
+              }
+              className="w-24 h-24 rounded-full"
+            />
           </View>
         </View>
 
         {/* Profile Info */}
         <View className="mt-14 px-4 pb-4 border-b border-gray-200">
           <View className="flex-row items-center">
-            <Text className="text-2xl font-bold text-gray-800">Gia Bảo</Text>
+            <Text className="text-2xl font-bold text-gray-800">{card.username}</Text>
             <Ionicons name='diamond' size={18} color="#422f96" style={{ marginLeft: 8 }} />
           </View>
           <Text className="text-gray-600 text-bold mt-1">{card?.sportName} {card.role.charAt(0).toUpperCase() + card.role.slice(1)}</Text>
           <View className="mt-2">
             <View className="flex-row items-center">
-              <Text className="text-gray-500 text-sm">Foreign Trade University HCMC</Text>
+              <Text className="text-gray-500 text-sm pe-2">{card?.method}</Text>
+              <Ionicons name="radio-button-on" size={6} color="gray" />
+              <Text className="text-gray-500 text-sm ps-2">{card?.skillLevel}</Text>
             </View>
             <View className="flex-row items-center mt-1">
-              <Text className="text-gray-500 text-sm">Binh Thanh District, Ho Chi Minh City</Text>
+              <Text className="text-gray-500 text-sm pe-2">{card?.teachingFrequency}</Text>
+              <Ionicons name="radio-button-on" size={6} color="gray" />
+              <Text className="text-gray-500 text-sm ps-2">{card?.fee}</Text>
             </View>
           </View>
         </View>

@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { FontAwesome, Entypo, Feather, MaterialIcons, Ionicons, AntDesign } from '@expo/vector-icons';
 import useAuth from '@/hooks/useAuth';
 import { auth } from '@/FirebaseConfig';
@@ -18,6 +18,24 @@ export default function AccountMenu() {
     { icon: <Feather name="star" size={26} color="#e53162" />, label: 'Đánh giá và phản hồi' },
     { icon: <Ionicons name="help-circle-outline" size={26} color="#e53162" />, label: 'Trung tâm Hỗ trợ' },
   ];
+
+  const confirmLogout = () => {
+    Alert.alert(
+      'Xác nhận đăng xuất',
+      'Bạn có chắc chắn muốn đăng xuất?',
+      [
+        {
+          text: 'Không',
+          style: 'cancel',
+        },
+        {
+          text: 'Có',
+          onPress: handleLogout,
+          style: 'destructive',
+        },
+      ]
+    );
+  };
 
   const handleLogout = async () => {
     try {
@@ -69,7 +87,7 @@ export default function AccountMenu() {
 
       <View className="absolute bottom-8 left-5 right-5">
         <TouchableOpacity
-          onPress={handleLogout}
+          onPress={confirmLogout}
           className="flex-row items-center justify-center bg-gray-100 py-4 rounded-full"
         >
           <AntDesign name="logout" size={22} color="#e53162" />
