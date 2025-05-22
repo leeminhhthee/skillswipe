@@ -1,9 +1,12 @@
-import { Feather, FontAwesome, Ionicons } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
-import { Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import { Feather, FontAwesome, Ionicons } from '@expo/vector-icons'
+import { useEffect, useState } from 'react'
+import { Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import * as ImagePicker from 'expo-image-picker'
+import useAuth from '@/hooks/useAuth'
 
 export default function MyProfileS() {
+    const { user, setUser } = useAuth(); 
+
     const [activeTab, setActiveTab] = useState<'trainee' | 'trainer'>('trainee');
     const [avatar, setAvatar] = useState(require('../../assets/images/avt.png'));
     const [banner, setBanner] = useState(require('../../assets/images/avt2.jpg'));
@@ -56,7 +59,7 @@ export default function MyProfileS() {
 
     // Chế độ chỉnh sửa trainee
     const [isEditingProfile, setIsEditingProfile] = useState(false);
-    const [editedName, setEditedName] = useState('Gia Bảo');
+    const [editedName, setEditedName] = useState(user?.displayName || "Gia Bảo");
     const [editedSchool, setEditedSchool] = useState('Foreign Trade University HCMC');
     const [editedAddress, setEditedAddress] = useState('Binh Thanh District, Ho Chi Minh City');
 
