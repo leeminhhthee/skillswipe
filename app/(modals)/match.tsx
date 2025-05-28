@@ -29,7 +29,11 @@ export default function MatchScreen() {
           resizeMode="cover"
         />
         <Image
-          source={{ uri: parsedMatched.photoUrl }}
+          source={
+            parsedMatched?.photoURL
+              ? { uri: parsedMatched.photoURL }
+              : require('../../assets/images/avt_placeholder.png')
+          }
           className="w-28 h-28 rounded-full border-4 border-white"
         />
       </View>

@@ -20,13 +20,23 @@ const ProfileScreen = () => {
     // Bạn có thể gọi API lưu rating ở đây nếu cần
   };
 
+  const sportMap = {
+    badminton: 'Cầu lông',
+    basketball: 'Bóng rổ',
+    volleyball: 'Bóng chuyền',
+    tennis: 'Tennis',
+    guitar: 'Guitar',
+    piano: 'Piano',
+    swim: 'Bơi lội',
+  }
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView className="flex-1">
         {/* Profile Banner */}
         <View className="relative">
           <Image 
-            source={require('../../assets/images/avt2.jpg')} 
+            source={require('../../assets/images/logo_stroke.png')} 
             className="w-full h-32" 
             resizeMode="cover"
           />
@@ -50,7 +60,7 @@ const ProfileScreen = () => {
             <Text className="text-2xl font-bold text-gray-800">{card.username}</Text>
             <Ionicons name='diamond' size={18} color="#422f96" style={{ marginLeft: 8 }} />
           </View>
-          <Text className="text-gray-600 text-bold mt-1">{card?.sportName} {card.role.charAt(0).toUpperCase() + card.role.slice(1)}</Text>
+          <Text className="text-gray-600 text-bold mt-1">{sportMap[card.sportTrainer] ?? card.sportTrainer} {card.role.charAt(0).toUpperCase() + card.role.slice(1)}</Text>
           <View className="mt-2">
             <View className="flex-row items-center">
               <Text className="text-gray-500 text-sm pe-2">{card?.method}</Text>
@@ -69,8 +79,7 @@ const ProfileScreen = () => {
         <View className="p-4 border-b border-gray-200">
           <Text className="font-bold text-lg text-gray-800 mb-2">Giới thiệu</Text>
           <Text className="text-gray-700 leading-5">
-            Tôi đang có nhu cầu tìm một huấn luyện viên cầu lông chuyên nghiệp. Mục tiêu của tôi là rèn luyện đúng kỹ
-            thuật cơ bản, có thêm khả năng di chuyển, phản xạ...
+            Something...
           </Text>
         </View>
 
@@ -160,7 +169,7 @@ const ProfileScreen = () => {
                 Kỹ năng cơ bản
               </Text>
               <Text className="text-gray-700 leading-5 font-light italic">
-                Kỹ năng cầm vợt; Tư thế chuẩn bị & di chuyển; Kỹ thuật đánh cầu cơ bản;...
+                Something...
               </Text>
             </View>
             <View>
@@ -168,7 +177,7 @@ const ProfileScreen = () => {
                 Kỹ năng nâng cao
               </Text>
               <Text className="text-gray-700 leading-5 font-light italic">
-                Chiến thuật cơ bản trong thi đấu; Tâm lý thi đấu & dinh dưỡng thể thao;...
+                Something...
               </Text>
             </View>
           </View>

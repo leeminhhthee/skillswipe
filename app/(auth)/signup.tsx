@@ -31,6 +31,19 @@ export default function SignupScreen() {
     { label: 'Trainer', value: 'trainer' },
   ]);
 
+  // Dropdown picker for sport
+  const [openSports, setOpenSports] = useState(false);
+  const [selectedSports, setSelectedSports] = useState(null);
+  const [sportsItems, setSportsItems] = useState([
+    { label: 'Cầu lông', value: 'badminton' },
+    { label: 'Bóng rổ', value: 'basketball' },
+    { label: 'Bóng chuyền', value: 'volleyball' },
+    { label: 'Tennis', value: 'tennis' },
+    { label: 'Guitar', value: 'guitar' },
+    { label: 'Piano', value: 'piano' },
+    { label: 'Bơi lội', value: 'swim' },
+  ]);
+
   const handleSignup = async () => {
     if (!displayName || !phoneOrMail || !password || !confirmPassword || !selectedRole) {
       Alert.alert('Vui lòng nhập đầy đủ thông tin');
@@ -48,16 +61,33 @@ export default function SignupScreen() {
 
       await updateProfile(user, { displayName });
 
-      // Lưu role vào Realtime Database
-      await set(ref(dbRealtime, `users/${user.uid}/role`), selectedRole);
+      const photoUrl = user.photoURL || null;
+
+      // Lưu vào Realtime Database
+      await set(ref(dbRealtime, `users/${user.uid}`), {
+        username: displayName,
+        photoUrl: photoUrl,
+        age: 21,
+        method: "offline",
+        fee: 0,
+        skillLevel: "basic",
+        teachingFrequency: "under_2m",
+        likePerson: [],
+        likeByPerson: [],
+        role: selectedRole,
+        sportTrainer: selectedSports || null,
+        email: user.email,
+        uid: user.uid,
+      });
 
       // Set user vào context (kèm role)
       setUser({
         uid: user.uid,
         email: user.email,
         displayName,
-        photoURL: user.photoURL,
+        photoURL: photoUrl,
         role: selectedRole,
+        sportTrainer: selectedSports,
       });
 
       Alert.alert('Đăng ký thành công', `Chào mừng, ${displayName}`);
@@ -122,6 +152,38 @@ export default function SignupScreen() {
             setValue={setSelectedRole}
             setItems={setRoleItems}
             placeholder="-- Chọn vai trò --"
+            style={{
+              borderRadius: 25,
+              borderColor: '#ccc',
+              height: 55,
+              paddingHorizontal: 16,
+              marginBottom: 10,
+            }}
+            dropDownContainerStyle={{
+              borderRadius: 20,
+              borderColor: '#ccc',
+            }}
+            placeholderStyle={{
+              color: '#999',
+            }}
+            textStyle={{
+              fontSize: 16,
+            }}
+            theme="LIGHT"
+          />
+        </View>
+
+        {/* Lĩnh vực Picker */}
+        <Text className="mb-1 text-gray-700">Lĩnh vực</Text>
+        <View style={{ zIndex: openSports ? 3000 : 1000 }}>
+          <DropDownPicker
+            open={openSports}
+            value={selectedSports}
+            items={sportsItems}
+            setOpen={setOpenSports}
+            setValue={setSelectedSports}
+            setItems={setSportsItems}
+            placeholder="-- Chọn lĩnh vực --"
             style={{
               borderRadius: 25,
               borderColor: '#ccc',

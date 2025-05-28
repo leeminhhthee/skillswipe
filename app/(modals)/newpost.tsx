@@ -7,25 +7,32 @@ import {
   Image,
   ScrollView,
   Alert,
+  ActivityIndicator,
+  Modal
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
-import { usePostStore } from '@/stores/postStore';
 import useAuth from '@/hooks/useAuth';
 import { Video } from 'expo-av';
+import { ref, push, set } from 'firebase/database';
+import { dbRealtime } from '../../FirebaseConfig';
+import { uploadToCloudinary } from '../../utils/cloudinary'
+
 
 const NewPost = () => {
-  const addPost = usePostStore((state) => state.addPost);
   const router = useRouter();
   const { user } = useAuth();
 
   const [caption, setCaption] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  const categories = ['Bóng đá', 'Bóng chuyền', 'Cầu lông'];
+  const categories = ['Bóng rổ', 'Bóng chuyền', 'Cầu lông', 'Tennis', 'Guitar'];
 
   const [selectedMedia, setSelectedMedia] = useState<string | null>(null);
   const [mediaType, setMediaType] = useState<'image' | 'video' | null>(null);
+
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const pickMedia = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -41,30 +48,47 @@ const NewPost = () => {
     }
   };
 
-  const handlePost = () => {
+  const handlePost = async () => {
     if (!caption.trim() || !selectedCategory) {
       Alert.alert('Lỗi', 'Vui lòng nhập nội dung và chọn lĩnh vực.');
       return;
     }
 
-    const newPost = {
-      id: Date.now(),
-      authorName: user?.displayName || user?.email || 'Người dùng mới',
-      authorRole: selectedCategory,
-      authorAvatar: user?.photoURL
-        ? { uri: user.photoURL }
-        : require('../../assets/images/avt_placeholder.png'),
-      caption,
-      postMedia: selectedMedia,
-      mediaType,
-      createdAt: Date.now(),
-      initialLikes: 0,
-      initialIsLiked: false,
-    };
+    try {
+      setIsLoading(true);
 
-    addPost(newPost);
-    Alert.alert('Đã đăng bài!', 'Bài viết của bạn đã được tạo.');
-    router.back();
+      let mediaUrl = null;
+      if (selectedMedia && mediaType) {
+        mediaUrl = await uploadToCloudinary(selectedMedia, mediaType);
+      }
+      // Tạo reference tới node posts
+      const userPostsRef = ref(dbRealtime, `postsByUser/${user.uid}`);
+
+      // Tạo một key mới cho bài viết (push tự tạo key ngẫu nhiên)
+      const newPostRef = push(userPostsRef);
+
+      // Chuẩn bị dữ liệu bài viết
+      const newPost = {
+        authorName: user?.displayName || user?.email || 'Người dùng mới',
+        authorRole: selectedCategory,
+        authorAvatar: user?.photoURL || null, // lưu url string hoặc null
+        caption,
+        postMedia: mediaUrl,
+        mediaType: mediaType || null,
+        createdAt: Date.now(),
+        initialLikes: 0,
+        initialIsLiked: false,
+      };
+
+      // Ghi dữ liệu vào realtime database với key mới
+      await set(newPostRef, newPost);
+
+      Alert.alert('Đã đăng bài!', 'Bài viết của bạn đã được tạo.');
+      router.back();
+    } catch (error) {
+      Alert.alert('Lỗi', 'Không thể đăng bài. Vui lòng thử lại.');
+      console.error(error);
+    }
   };
 
   return (
@@ -152,11 +176,21 @@ const NewPost = () => {
 
       {/* Submit button */}
       <TouchableOpacity
-        className="bg-blue-500 py-3 rounded-lg items-center"
+        className={`bg-blue-500 py-3 rounded-lg items-center ${isLoading ? 'opacity-50' : ''}`}
         onPress={handlePost}
+        disabled={isLoading}
       >
         <Text className="text-white text-base font-semibold">Đăng bài</Text>
       </TouchableOpacity>
+
+      <Modal transparent visible={isLoading}>
+        <View className="flex-1 bg-black bg-opacity-40 justify-center items-center">
+          <View className="bg-white p-4 rounded-lg flex-row items-center space-x-2">
+            <ActivityIndicator size="large" color="#3498db" />
+            <Text className="text-base font-semibold">Đang đăng bài...</Text>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 };

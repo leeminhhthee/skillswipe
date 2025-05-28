@@ -18,7 +18,7 @@ export default function NeedDesign() {
     { label: 'Tennis', value: 'tennis' },
     { label: 'Guitar', value: 'guitar' },
     { label: 'Piano', value: 'piano' },
-    { label: 'Bơi lội', value: 'bơi lội' },
+    { label: 'Bơi lội', value: 'swim' },
   ]);
 
   // Dropdown 2: Hình thức giảng dạy
@@ -61,10 +61,10 @@ export default function NeedDesign() {
 
   const handleConfirm = () => {
     const selectedItem = itemsSubject.find(item => item.value === selectedSubject);
-    const selectedLabel = selectedItem?.label;
+    const selectedValue = selectedItem?.value;
 
     usePassed.getState().setPassed(true);
-    usePassed.getState().setSubject(selectedLabel); // gửi label thay vì value
+    usePassed.getState().setSubject(selectedValue);
     router.dismiss();
   };
 

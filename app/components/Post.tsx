@@ -43,7 +43,13 @@ export default function Post({
       {/* Header */}
       <View className="flex-row items-center gap-2 p-3">
         <View className="w-10 h-10 rounded-full overflow-hidden">
-          <Image source={authorAvatar} style={{ width: 40, height: 40 }} />
+          <Image 
+            source={
+              authorAvatar
+                ? { uri: authorAvatar }
+                : require('../../assets/images/avt_placeholder.png')
+            } 
+            style={{ width: 40, height: 40 }} />
         </View>
         <View className="flex-1">
           <Text className="text-sm font-medium">{authorName}</Text>
@@ -56,7 +62,7 @@ export default function Post({
       {postMedia && mediaType === 'image' && (
         <Image
           source={typeof postMedia === 'string' ? { uri: postMedia } : postMedia}
-          style={{ width: '100%', height: undefined, aspectRatio: 3 / 4 }}
+          style={{ width: '100%', height: undefined, aspectRatio: 4 / 4 }}
           resizeMode="cover"
         />
       )}
@@ -68,7 +74,7 @@ export default function Post({
           resizeMode="cover"
           shouldPlay={false}
           isLooping={false}
-          style={{ width: '100%', height: 280 }}
+          style={{ width: '100%', height: 350 }}
         />
       )}
 
@@ -81,7 +87,7 @@ export default function Post({
           </TouchableOpacity>
           <View className="flex-row items-center gap-1">
             <Ionicons name="chatbubble" size={24} color="gray" />
-            <Text className="text-sm">35</Text>
+            <Text className="text-sm">0</Text>
           </View>
           <Ionicons name="share" size={24} color="gray" />
         </View>
