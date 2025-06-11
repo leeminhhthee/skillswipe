@@ -1,6 +1,6 @@
 # Skillswipe
 
-**Skillswipe** is a mobile application built with **React Native** using **Expo**, developed by a student team at **Foreign Trade University (FTU)**. The app connects **trainees** and **trainers** for skill development, while also laying the groundwork for **skill swapping**—where users can exchange their skills in a Tinder-style matching interface.
+**Skillswipe** is a mobile app built with **React Native** using **Expo**, built for a team of **Foreign Trade University (FTU)** students participating in a competition in Ho Chi Minh City. The app connects **learners** and **mentors** to develop skills, while also providing a platform for **skills trading**—where users can trade their skills in a Tinder-style matchmaking interface.
 
 ## 🚀 Features
 
