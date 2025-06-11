@@ -73,5 +73,5 @@ This project is developed by a group of students from **Foreign Trade University
 | ![](screenshots/SS7.jpg) | ![](screenshots/SS8.jpg) | ![](screenshots/SS9.jpg) |
 | ![](screenshots/SS10.jpg) | ![](screenshots/SS11.jpg) | |
 
-| [![Demo Video 1](screenshots/VD1-thumbnail.jpg)](screenshots/VD1.mp4) | [![Demo Video 2](screenshots/VD2-thumbnail.jpg)](screenshots/VD2.mp4) | |
-
+[▶️ Watch Demo 1](https://res.cloudinary.com/dikzmjuff/video/upload/v1749626036/VD1_ovrlgu.mp4)
+[▶️ Watch Demo 2](https://res.cloudinary.com/dikzmjuff/video/upload/v1749626002/VD2_tn1gru.mp4)
