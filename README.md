@@ -1,55 +1,75 @@
-# Welcome to your Expo app 👋
+# Skillswipe
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Skillswipe** is a mobile application built with **React Native** using **Expo**, developed by a student team at **Foreign Trade University (FTU)**. The app connects **trainees** and **trainers** for skill development, while also laying the groundwork for **skill swapping**—where users can exchange their skills in a Tinder-style matching interface.
 
-## Get started
+## 🚀 Features
 
-1. Install dependencies
+Skillswipe aims to create a dynamic, interactive platform where:
+- **Trainees** can find **Trainers** to learn new skills.
+- In the future, users with complementary skill needs will be able to **swap knowledge** (e.g., one teaches design, the other teaches coding).
+- Matching is based on mutual interest, and chatting is only available after a successful match.
 
-   ```bash
-   npm install
-   ```
+## 🔧 Tech Stack
 
-2. Start the app
+- **Frontend**: React Native (with [Expo](https://expo.dev/))
+- **Backend**: Firebase (Authentication, Firestore, Realtime Database)
+- **Media Storage**: Cloudinary (for profile pictures and post images)
+- **Others**: 
+  - Firebase Cloud Messaging (for notifications, planned)
+  - Expo Router, AsyncStorage, etc.
 
-   Different network:
-   ```bash
-   npx expo start --tunnel
-   ```
-   Same network:
-   ```bash
-   npx expo start
-   ```
+## ✨ Current Features
 
-In the output, you'll find options to open the app in a
+### 🧭 Trainee to Trainer Matching
+- Swipe interface similar to Tinder
+- Match logic and mutual chat access
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### 💬 Messaging (Coming Soon)
+- One-on-one chat after matching (under development)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### 📄 Trainer Profiles
+- View detailed information about trainers
+- Browse skills, bios, and other info
 
-## Get a fresh project
+### 🧑‍💻 Profile Management
+- Edit personal information
+- Add skills you want to teach or learn
 
-When you're ready, run:
+### 🌐 Community Tab
+- Post articles, questions, and updates
+- Like and comment on posts
+
+### 📅 Schedule Booking (Coming Soon)
+- Book training sessions with trainers
+- Calendar integration under development
+
+### 🔁 Skill Swap (Coming Soon)
+- Users can both train and be trained
+- Mutual exchange logic in progress
+
+## 📦 Installation
 
 ```bash
-npm run reset-project
+git clone https://github.com/leeminhhthee/skillswipe.git
+cd skillswipe
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+With run in different network:
+```bash
+npx expo start --tunnel
+```
 
-## Learn more
+## 🤝 Contributors
 
-To learn more about developing your project with Expo, look at the following resources:
+This project is developed by a group of students from **Foreign Trade University (FTU)** as part of a team-based learning initiative.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🖼️ Screenshots
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+|-----------|------------|--------------|
+| ![](screenshots/SS1.jpg) | ![](screenshots/SS2.jpg) | ![](screenshots/SS3.jpg) |
+| ![](screenshots/SS4.jpg) | ![](screenshots/SS5.jpg) | ![](screenshots/SS6.jpg) |
+| ![](screenshots/SS7.jpg) | ![](screenshots/SS8.jpg) | ![](screenshots/SS9.jpg) |
+| ![](screenshots/SS10.jpg) | ![](screenshots/SS11.jpg) | |
+| ![](screenshots/VD1.mp4) | ![](screenshots/VD2.mp4) | |
