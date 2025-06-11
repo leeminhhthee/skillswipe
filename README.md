@@ -73,5 +73,13 @@ This project is developed by a group of students from **Foreign Trade University
 | ![](screenshots/SS7.jpg) | ![](screenshots/SS8.jpg) | ![](screenshots/SS9.jpg) |
 | ![](screenshots/SS10.jpg) | ![](screenshots/SS11.jpg) | |
 
-🎬 [▶️ Watch Demo Video 1](https://your-link.com/VD1.mp4)  
-🎬 [▶️ Watch Demo Video 2](https://your-link.com/VD2.mp4)
+<video width="320" height="240" controls>
+  <source src="screenshots/VD1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<video width="320" height="240" controls>
+  <source src="screenshots/VD2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
