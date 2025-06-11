@@ -67,9 +67,12 @@ This project is developed by a group of students from **Foreign Trade University
 
 ## 🖼️ Screenshots
 
-|-----------|------------|--------------|
 | ![](screenshots/SS1.jpg) | ![](screenshots/SS2.jpg) | ![](screenshots/SS3.jpg) |
+|-----------|------------|--------------|
 | ![](screenshots/SS4.jpg) | ![](screenshots/SS5.jpg) | ![](screenshots/SS6.jpg) |
+|-----------|------------|--------------|
 | ![](screenshots/SS7.jpg) | ![](screenshots/SS8.jpg) | ![](screenshots/SS9.jpg) |
+|-----------|------------|--------------|
 | ![](screenshots/SS10.jpg) | ![](screenshots/SS11.jpg) | |
+|-----------|------------|--------------|
 | ![](screenshots/VD1.mp4) | ![](screenshots/VD2.mp4) | |
