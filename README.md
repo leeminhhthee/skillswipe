@@ -52,7 +52,7 @@ Skillswipe aims to create a dynamic, interactive platform where:
 ```bash
 git clone https://github.com/leeminhhthee/skillswipe.git
 cd skillswipe
-npm install
+yarn
 npx expo start
 ```
 
